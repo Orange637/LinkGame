@@ -1,0 +1,72 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:LinkGame1.Controls"
+                    xmlns:converters="clr-namespace:LinkGame1.Converters">
+
+
+    <converters:LinkImageConverter x:Key="LinkImageConverter" />
+
+    <Style TargetType="controls:LinkImage">
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:LinkImage">
+                    <Border Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            Background="White"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <!--
+                            <Rectangle Name="Piece">
+                            <Rectangle.Fill>
+                            <ImageBrush ImageSource="{TemplateBinding Value, Converter={StaticResource LinkImageConverter}}" />
+                            </Rectangle.Fill>
+                            </Rectangle>
+                        -->
+                        <Grid>
+                            <Image x:Name="Piece" Source="{TemplateBinding Value, Converter={StaticResource LinkImageConverter}}" />
+                            <!--
+                                <TextBlock HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                DataContext="{TemplateBinding Value}"
+                                FontWeight="Bold">
+                                <Run Text="{Binding Row}" />
+                                <Run Text="," />
+                                <Run Text="{Binding Column}" />
+                                </TextBlock>
+                            -->
+                            <Rectangle x:Name="Adorner"
+                                       Fill="SkyBlue"
+                                       Opacity="0.5"
+                                       Stroke="Blue"
+                                       StrokeThickness="1"
+                                       Visibility="Collapsed" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.05" ScaleY="1.05" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <!--  <Setter TargetName="Piece" Property="Opacity" Value="0.7" />  -->
+                            <Setter TargetName="Adorner" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <Trigger Property="IsDead" Value="True">
+                            <Setter Property="Visibility" Value="Hidden" />
+                            <Setter Property="IsEnabled" Value="False" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,15 @@
+﻿<Window x:Class="LinkGame1.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:LinkGame1.Controls"
+        xmlns:views="clr-namespace:LinkGame1.Views"
+        Title="Dota LinkGame"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Width="900" Height="650"
+        WindowStartupLocation="CenterScreen">
+    <ContentControl x:Name="MainRegion">
+        <ContentControl.Content>
+            <views:WelcomeView />
+        </ContentControl.Content>
+    </ContentControl>
+</Window>
